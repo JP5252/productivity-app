@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:productivity_app/calendar_page.dart';
 import 'package:productivity_app/drawer.dart';
 import 'page_titles.dart';
 
@@ -14,14 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Personal Tasks',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 4, 71, 130)),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: PageTitles.todaysTasks),
-        routes: {'calender_page': (context) => CalendarPage()});
+      title: 'Personal Tasks',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 4, 71, 130)),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: PageTitles.todaysTasks),
+    );
   }
 }
 

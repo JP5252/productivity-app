@@ -20,7 +20,7 @@ class _MyDrawerState extends State<MyDrawer> {
             child: null,
           ),
           ListTile(
-            title: Text(PageTitles.todaysTasks),
+            title: const Text(PageTitles.todaysTasks),
             onTap: () {
               Navigator.push(
                 context,
@@ -33,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CalendarPage()),
+                MaterialPageRoute(builder: (context) => const CalendarPage()),
               );
             },
           ),
