@@ -1,5 +1,6 @@
 // task.dart
 class Task {
-  final String title;
+  String title;
+  late DateTime dueDate;
   Task(this.title);
 }
