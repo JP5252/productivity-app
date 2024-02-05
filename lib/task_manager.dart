@@ -7,7 +7,7 @@ class TaskManager {
   TaskManager._internal();
 
   // Map to store tasks
-  Map<DateTime, List<Task>> tasks = {};
+  final Map<DateTime, List<Task>> tasks = {};
 
   // Method to add tasks
   void addTask(DateTime date, Task task) {

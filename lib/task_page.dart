@@ -28,13 +28,13 @@ class _TaskPageState extends State<TaskPage> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          PageTitles.calendar,
+          PageTitles.todaysTasks,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
-      drawer: MyDrawer(taskManager: widget.taskManager), // Pass TaskManager
+      drawer: MyDrawer(taskManager: widget.taskManager),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class _TaskPageState extends State<TaskPage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         ),
