@@ -1,3 +1,5 @@
+import 'package:productivity_app/task.dart';
+
 // task_manager.dart
 class TaskManager {
   static final TaskManager _instance = TaskManager._internal();
@@ -15,10 +17,4 @@ class TaskManager {
       tasks[date] = [task];
     }
   }
-}
-
-// task.dart
-class Task {
-  final String title;
-  Task(this.title);
 }
