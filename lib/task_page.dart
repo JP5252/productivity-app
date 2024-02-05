@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'drawer.dart';
-import 'page_titles.dart';
+import 'package:productivity_app/drawer.dart';
+import 'package:productivity_app/page_titles.dart';
+import 'package:productivity_app/task_manager.dart';
 
-class MyTaskPage extends StatefulWidget {
-  const MyTaskPage({super.key});
+class TaskPage extends StatefulWidget {
+  final TaskManager taskManager;
+
+  const TaskPage({Key? key, required this.taskManager}) : super(key: key);
 
   @override
-  State<MyTaskPage> createState() => _MyTaskPageState();
+  State<TaskPage> createState() => _TaskPageState();
 }
 
-class _MyTaskPageState extends State<MyTaskPage> {
+class _TaskPageState extends State<TaskPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -31,7 +34,7 @@ class _MyTaskPageState extends State<MyTaskPage> {
           ),
         ),
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(taskManager: widget.taskManager), // Pass TaskManager
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +44,7 @@ class _MyTaskPageState extends State<MyTaskPage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ],
         ),

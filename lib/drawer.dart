@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:productivity_app/calendar_page.dart';
-import 'package:productivity_app/main.dart';
-import 'page_titles.dart';
+import 'package:productivity_app/task_page.dart';
+import 'package:productivity_app/page_titles.dart';
+import 'package:productivity_app/task_manager.dart';
 
 class MyDrawer extends StatefulWidget {
-  const MyDrawer({super.key});
+  final TaskManager taskManager;
+
+  const MyDrawer({Key? key, required this.taskManager}) : super(key: key);
 
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  _DrawerState createState() => _DrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _DrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,7 +27,10 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MyApp()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      TaskPage(taskManager: widget.taskManager),
+                ),
               );
             },
           ),
@@ -33,7 +39,10 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CalendarPage()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CalendarPage(taskManager: widget.taskManager),
+                ),
               );
             },
           ),

@@ -6,7 +6,9 @@ import 'package:productivity_app/task.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key});
+  final TaskManager taskManager;
+
+  const CalendarPage({Key? key, required this.taskManager}) : super(key: key);
 
   @override
   State<CalendarPage> createState() => _CalendarPageState();
@@ -18,18 +20,15 @@ class _CalendarPageState extends State<CalendarPage> {
 
   late final ValueNotifier<List<Task>> _selectedTasks;
 
-  // set initial state of selected day to today
   @override
   void initState() {
     super.initState();
-    _selectedDay = today; // Set the default selected day to today
+    _selectedDay = today;
     _selectedTasks = ValueNotifier(_getTasksForDay(_selectedDay!));
   }
 
-  TaskManager taskManager = TaskManager();
   TextEditingController _addTaskNameController = TextEditingController();
 
-  // for selecting a day in the calendar
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
@@ -38,9 +37,8 @@ class _CalendarPageState extends State<CalendarPage> {
     });
   }
 
-  // get all the events from selected day
   List<Task> _getTasksForDay(DateTime day) {
-    return taskManager.tasks[day] ?? [];
+    return widget.taskManager.tasks[day] ?? [];
   }
 
   @override
@@ -56,11 +54,10 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
         ),
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(taskManager: widget.taskManager),
       body: Column(
         children: [
           TableCalendar(
-            // setup
             focusedDay: today,
             firstDay: DateTime.utc(2000, 01, 01),
             lastDay: DateTime.utc(2100, 01, 01),
@@ -69,28 +66,29 @@ class _CalendarPageState extends State<CalendarPage> {
               titleCentered: true,
             ),
             availableGestures: AvailableGestures.all,
-            // for selection of day
             onDaySelected: _onDaySelected,
             selectedDayPredicate: (day) => isSameDay(day, today),
-            // get the tasks for selected day
             eventLoader: _getTasksForDay,
           ),
           Expanded(
             child: ValueListenableBuilder<List<Task>>(
-                valueListenable: _selectedTasks,
-                builder: (context, value, _) {
-                  return ListView.builder(
-                      itemCount: value.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: ListTile(title: Text(value[index].title)));
-                      });
-                }),
+              valueListenable: _selectedTasks,
+              builder: (context, value, _) {
+                return ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(title: Text(value[index].title)),
+                    );
+                  },
+                );
+              },
+            ),
           )
         ],
       ),
@@ -112,7 +110,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ElevatedButton(
                     onPressed: () {
                       Task newTask = Task(_addTaskNameController.text);
-                      taskManager.addTask(_selectedDay!, newTask);
+                      widget.taskManager.addTask(_selectedDay!, newTask);
                       Navigator.of(context).pop();
                       _selectedTasks.value = _getTasksForDay(_selectedDay!);
                     },

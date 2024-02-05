@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:productivity_app/drawer.dart';
-import 'page_titles.dart';
-import 'task_page.dart'; // Import the Task Page
+import 'package:productivity_app/task_page.dart';
+import 'package:productivity_app/task_manager.dart';
 
 void main() {
-  runApp(const MyApp());
+  final TaskManager taskManager = TaskManager();
+  runApp(MyApp(taskManager: taskManager));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final TaskManager taskManager;
+
+  const MyApp({super.key, required this.taskManager});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +18,11 @@ class MyApp extends StatelessWidget {
       title: 'Personal Tasks',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 4, 71, 130)),
+          seedColor: const Color.fromARGB(255, 4, 71, 130),
+        ),
         useMaterial3: true,
       ),
-      home: const MyTaskPage(),
+      home: TaskPage(taskManager: taskManager),
     );
   }
 }
