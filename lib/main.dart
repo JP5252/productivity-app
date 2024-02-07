@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:productivity_app/task_page.dart';
 import 'package:productivity_app/task_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:productivity_app/firebase_options.dart';
 
-void main() {
+Future<void> main() async {
   final TaskManager taskManager = TaskManager();
   runApp(MyApp(taskManager: taskManager));
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {

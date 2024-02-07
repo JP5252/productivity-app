@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539621457709",
+    "project_id": "personal-task-app",
+    "storage_bucket": "personal-task-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539621457709:android:1c0c1ba3b4bd7c7b4b9da4",
+        "android_client_info": {
+          "package_name": "com.example.productivity_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzjlWz5Ju8gFiGVIawweoSYP1qW4ipMUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
